@@ -54,7 +54,10 @@ const ToSolidityPlanStatus = (status: PlanStatus) => {
   }
 }
 
-const valueOfDeploy = "0x9184e72a"
+const valueOfVote = "0x9184e72a"
+const valueOfCreatePlan = "0x9184e72a"
+const valueOfSuggestPlan = "0x9184e72a"
+
 const usePriorily = () => {
   const { eoa } = useMetaMask()
   const cotractAddress = useRecoilValue(contractAddressStore)
@@ -62,7 +65,10 @@ const usePriorily = () => {
     () => (typeof window === "undefined" ? {} : ((window as unknown as any).ethereum as any)),
     []
   )
-  const priorilyContract = useMemo(() => new web3.eth.Contract(contractABI.abi, cotractAddress), [])
+  const priorilyContract = useMemo(
+    () => new web3.eth.Contract(contractABI.abi, cotractAddress),
+    [cotractAddress]
+  )
 
   const getPlans = async () => {
     const plans = await priorilyContract.methods.getPlans().call()
@@ -91,7 +97,7 @@ const usePriorily = () => {
             to: cotractAddress,
             from: eoa,
             data: priorilyContract.methods.vote(planId).encodeABI(),
-            value: "0x9184e72a",
+            value: valueOfVote,
           },
         ],
       })
@@ -148,7 +154,7 @@ const usePriorily = () => {
           {
             to: cotractAddress,
             from: eoa,
-            value: "0x9184e72a",
+            value: valueOfCreatePlan,
             data: priorilyContract.methods.createPlan(title, playType).encodeABI(),
             chainId,
           },
@@ -171,7 +177,7 @@ const usePriorily = () => {
           {
             to: cotractAddress,
             from: eoa,
-            value: "0x9184e72a",
+            value: valueOfSuggestPlan,
             data: priorilyContract.methods.suggestPlan(title, playType).encodeABI(),
             chainId,
           },
