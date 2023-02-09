@@ -23,6 +23,7 @@
     "test": "./node_modules/.bin/hardhat test",
     "node": "npx hardhat node",
     "build": "npx hardhat compile",
-    "test-localhost": "npx hardhat test --network localhost"
+    "test-localhost": "npx hardhat test --network localhost",
+    "deploy-local": "npx hardhat run --network localhost scripts/deploy.js"
   }
 }

@@ -27,8 +27,10 @@ contract Priorily {
     address public superOwner;
     address[] public owners;
 
-    uint256 amountToCreatePlan = 3000 wei;
-    uint256 amountToVote = 100 wei;
+    // 1,000,000,000,000,000,000 = 1 eth
+    uint256 amountToCreatePlan =  1000000000000000
+ wei;
+    uint256 amountToVote = 100000000000 wei;
 
     constructor(address _treasury) {
       owners = new address[](0);

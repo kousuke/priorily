@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import useMetaMask from "./useMetaMask"
 import Web3 from "web3"
-import { ethers } from "ethers"
+import { BigNumber, ethers } from "ethers"
 import { useRecoilValue } from "recoil"
 import { contractAddressStore } from "../stores/contract-address-store"
 const contractABI = require("../../../contracts/artifacts/contracts/Priorily.sol/Priorily.json")
@@ -54,9 +54,9 @@ const ToSolidityPlanStatus = (status: PlanStatus) => {
   }
 }
 
-const valueOfVote = "0x9184e72a"
-const valueOfCreatePlan = "0x9184e72a"
-const valueOfSuggestPlan = "0x9184e72a"
+const valueOfVote = ethers.BigNumber.from(100000000000).toHexString() // "0x9184e72a"
+const valueOfCreatePlan = ethers.BigNumber.from(1000000000000000).toHexString() // "0x9184e72a"
+const valueOfSuggestPlan = ethers.BigNumber.from(100000000000).toHexString() // "0x9184e72a"
 
 const usePriorily = () => {
   const { eoa } = useMetaMask()
